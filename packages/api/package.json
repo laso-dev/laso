@@ -1,6 +1,9 @@
 {
   "name": "@laso/api",
   "type": "module",
+  "exports": {
+    ".": "./src/types.ts"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",

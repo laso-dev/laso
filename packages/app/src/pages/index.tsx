@@ -1,3 +1,7 @@
+import { api, trpc } from '../lib/trpc'
+
 export default function Home() {
-  return <h1>Home</h1>
+  const hello = trpc.hello.useQuery()
+
+  return <h1>Home {hello.data}</h1>
 }
