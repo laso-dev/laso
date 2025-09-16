@@ -18,7 +18,16 @@ app.use(
 
 app.on(['POST', 'GET'], '/api/auth/*', (c) => auth.handler(c.req.raw))
 
-app.use('/trpc/*', trpcServer({ router: appRouter }))
+app.use(
+  '/trpc/*',
+  trpcServer({
+    router: appRouter,
+    createContext: (_, c) => ({
+      req: c.req.raw,
+      rawHeaders: c.req.raw.headers,
+    }),
+  }),
+)
 
 serve({ fetch: app.fetch, port: 8000 }, (info) => {
   console.log(`🌐 running on port ${info.port}`)

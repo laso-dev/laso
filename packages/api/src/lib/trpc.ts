@@ -1,15 +1,28 @@
-import { initTRPC } from '@trpc/server'
+import { initTRPC, TRPCError } from '@trpc/server'
 import { z } from 'zod'
+import { auth } from './auth'
 
-// Context type for Hono integration
 export interface Context {
-  // Add any context properties you need
-  // For example: user, env variables, etc.
+  req: Request
+  rawHeaders: Headers
 }
 
-// Initialize tRPC
 const t = initTRPC.context<Context>().create()
 
-// Export reusable router and procedure helpers
+export const authMiddleware = t.middleware(async ({ ctx, next }) => {
+  const session = await auth.api.getSession({ headers: ctx.rawHeaders })
+
+  if (!session?.session) throw new TRPCError({ code: 'UNAUTHORIZED' })
+
+  return next({
+    ctx: {
+      ...ctx,
+      user: session.user,
+      session: session.session,
+    },
+  })
+})
+
 export const router = t.router
 export const publicProcedure = t.procedure
+export const protectedProcedure = t.procedure.use(authMiddleware)

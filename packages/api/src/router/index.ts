@@ -1,12 +1,10 @@
 import { z } from 'zod'
-import { router, publicProcedure } from '../lib/trpc.js'
+import { router, publicProcedure, protectedProcedure } from '../lib/trpc.js'
 
 export const appRouter = router({
-  hello: publicProcedure
-    .input(z.string().nullish())
-    .query(({ input }) => {
-      return `Hello ${input ?? 'World'}!`
-    }),
+  hello: protectedProcedure.input(z.string().nullish()).query(({ input, ctx }) => {
+    return ctx.user.email
+  }),
 
   // Example mutation
   createPost: publicProcedure

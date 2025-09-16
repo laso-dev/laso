@@ -16,6 +16,9 @@ export default function () {
       links: [
         httpBatchLink({
           url: 'http://localhost:8000/trpc',
+          fetch(url, options) {
+            return fetch(url, { ...options, credentials: 'include' })
+          },
           async headers() {
             const headers = new Headers()
             headers.set('x-trpc-source', 'react')
