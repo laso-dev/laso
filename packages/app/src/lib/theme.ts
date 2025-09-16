@@ -26,14 +26,6 @@ const buttonSizes = defaultConfig.theme?.recipes?.button.variants?.size as Recor
 const inputSizes = defaultConfig.theme?.recipes?.input.variants?.size as Record<string, any>
 const cardSizes = defaultConfig.theme?.slotRecipes?.card.variants?.size as Record<string, any>
 const theme = defineConfig({
-  globalCss: {
-    '*': {
-      fontFamily: `'JetBrains Mono Variable', monospace !important`,
-    },
-    'body, #root': {
-      height: '100vh',
-    },
-  },
   theme: {
     recipes: {
       heading: {
@@ -51,10 +43,11 @@ const theme = defineConfig({
         base: { fontSize: 'sm' },
         variants: {
           size: {
-            sm: { fontSize: 'sm' },
-            md: { fontSize: 'md' },
-            lg: { fontSize: 'lg' },
-            xl: { fontSize: 'xl' },
+            xs: { fontSize: '2xs' },
+            sm: { fontSize: 'xs' },
+            md: { fontSize: 'sm' },
+            lg: { fontSize: 'md' },
+            xl: { fontSize: 'lg' },
           },
         },
       },

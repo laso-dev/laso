@@ -1,0 +1,9 @@
+:root {
+  --chakra-fonts-mono: 'JetBrains Mono Variable', monospace !important;
+}
+
+body,
+#root {
+  height: 100vh;
+  font-family: Inter, sans-serif !important;
+}
