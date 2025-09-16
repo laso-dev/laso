@@ -8,13 +8,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.27.0",
+    "@emotion/react": "^11.14.0",
     "@laso/api": "workspace:*",
     "@tanstack/react-query": "^5.87.4",
     "@trpc/client": "^11.5.1",
     "@trpc/react-query": "^11.5.1",
     "better-auth": "^1.3.11",
+    "next-themes": "^0.4.6",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@generouted/react-router": "^1.20.0",

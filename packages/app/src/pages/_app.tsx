@@ -3,6 +3,7 @@ import { httpBatchLink } from '@trpc/client'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 import { trpc } from '../lib/trpc'
+import { Provider } from '../components/ui/provider'
 
 export default function () {
   const [queryClient] = useState(() => new QueryClient())
@@ -24,7 +25,9 @@ export default function () {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <Outlet />
+        <Provider>
+          <Outlet />
+        </Provider>
       </QueryClientProvider>
     </trpc.Provider>
   )
