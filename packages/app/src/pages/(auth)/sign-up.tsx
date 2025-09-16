@@ -1,70 +1,51 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Icon,
-  Input,
-  Link,
-  Separator,
-  Span,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-import { BsApple, BsGithub, BsGoogle, BsInfoCircle } from 'react-icons/bs'
+import { Button, Container, Heading, Input, Stack } from '@chakra-ui/react'
+import { useForm } from 'react-hook-form'
+import { authClient } from '../../lib/auth'
+import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from '../../router'
 
-export default function Block() {
+export default function () {
+  const form = useForm()
+  const navigate = useNavigate()
+
+  const sendVerificationOTP = useMutation({
+    mutationFn: (email: string) => {
+      return authClient.emailOtp.sendVerificationOtp({ email, type: 'sign-in' })
+    },
+  })
+
+  const onSubmit = form.handleSubmit(async (data) => {
+    await sendVerificationOTP.mutateAsync(data.email)
+
+    navigate('/verify', {
+      state: {
+        email: data.email,
+        type: 'sign-in',
+      },
+    })
+  })
+
   return (
-    <Container maxW="md" py={{ base: '12', md: '24' }}>
-      <Stack gap="6">
-        {/* <Logo /> */}
-
-        <VStack gap="2" textAlign="center" mt="4">
-          <Heading size="3xl">Log in to Laso</Heading>
-          <Text color="fg.muted">
-            Please sign in with your <Span fontWeight="medium">work email address</Span>
-          </Text>
-        </VStack>
-
-        <Stack gap="3" colorPalette="gray">
-          <Button variant="outline">
-            <BsGoogle />
-            Continue with Google
-          </Button>
-          <Button variant="outline">
-            <BsApple />
-            Continue with Apple
-          </Button>
-          <Button variant="outline">
-            <BsGithub />
-            Continue with GitHub
-          </Button>
-        </Stack>
-
-        <HStack gap="6">
-          <Separator flex="1" />
-          <Text textStyle="sm" color="fg.muted">
-            or
-          </Text>
-          <Separator flex="1" />
-        </HStack>
-
-        <Stack gap="4">
-          <Input placeholder="name@company.com" />
-          <Button>Continue with email</Button>
-        </Stack>
-
-        <Flex gap="2" bg="bg.muted" p="4" borderRadius="l2">
-          <Icon size="sm" color="fg.muted" pos="relative" top="0.5">
-            <BsInfoCircle />
-          </Icon>
-          <Text textStyle="sm" color="fg.muted">
-            We'll send you a verification code to your email address. Or you can{' '}
-            <Link href="#">sign in manually</Link>.
-          </Text>
-        </Flex>
+    <Container
+      maxW="md"
+      py={{ base: '12', md: '24' }}
+      h="full"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Stack gap="6" w="full">
+        <Heading as="h1" size="lg">
+          Laso
+        </Heading>
+        <form onSubmit={onSubmit}>
+          <Stack gap="4">
+            <Input placeholder="name@company.com" {...form.register('email')} />
+            <Button type="submit" size="sm">
+              Continue with email
+            </Button>
+          </Stack>
+        </form>
       </Stack>
     </Container>
   )

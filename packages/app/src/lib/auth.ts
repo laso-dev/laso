@@ -1,6 +1,7 @@
 import { createAuthClient } from 'better-auth/client'
-import { organizationClient } from 'better-auth/client/plugins'
+import { emailOTPClient, organizationClient } from 'better-auth/client/plugins'
 
 export const authClient = createAuthClient({
-  plugins: [organizationClient()],
+  baseURL: 'http://localhost:8000',
+  plugins: [organizationClient(), emailOTPClient()],
 })

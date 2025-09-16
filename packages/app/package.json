@@ -10,6 +10,8 @@
   "dependencies": {
     "@chakra-ui/react": "^3.27.0",
     "@emotion/react": "^11.14.0",
+    "@fontsource-variable/jetbrains-mono": "^5.2.7",
+    "@hookform/resolvers": "^5.2.2",
     "@laso/api": "workspace:*",
     "@tanstack/react-query": "^5.87.4",
     "@trpc/client": "^11.5.1",
@@ -18,7 +20,10 @@
     "next-themes": "^0.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0"
+    "react-hook-form": "^7.62.0",
+    "react-icons": "^5.5.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@generouted/react-router": "^1.20.0",

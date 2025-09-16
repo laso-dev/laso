@@ -1,9 +1,13 @@
+import { ColorModeProvider } from '@/components/ui/color-mode'
+import { trpc } from '@/lib/trpc'
+import { ChakraProvider } from '@chakra-ui/react'
+import '@fontsource-variable/jetbrains-mono'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink } from '@trpc/client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router'
-import { trpc } from '../lib/trpc'
-import { Provider } from '../components/ui/provider'
+import { Toaster } from '../components/ui/toaster'
+import { system } from '../lib/theme'
 
 export default function () {
   const [queryClient] = useState(() => new QueryClient())
@@ -23,12 +27,15 @@ export default function () {
   )
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <Provider>
+    <ChakraProvider value={system}>
+      <ColorModeProvider />
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
           <Outlet />
-        </Provider>
-      </QueryClientProvider>
-    </trpc.Provider>
+        </QueryClientProvider>
+      </trpc.Provider>
+
+      <Toaster />
+    </ChakraProvider>
   )
 }
