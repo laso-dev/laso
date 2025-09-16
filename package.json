@@ -2,7 +2,8 @@
   "name": "laso",
   "version": "1.0.0",
   "scripts": {
-    "dev": "pnpm -r dev"
+    "dev": "pnpm -r dev",
+    "infra": "docker compose up -d"
   },
   "prettier": {
     "trailingComma": "all",
