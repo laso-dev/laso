@@ -1,26 +1,4 @@
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
-import {
-  actionBarAnatomy,
-  alertAnatomy,
-  cardAnatomy,
-  checkboxAnatomy,
-  comboboxAnatomy,
-  dataListAnatomy,
-  menuAnatomy,
-  nativeSelectAnatomy,
-  numberInputAnatomy,
-  popoverAnatomy,
-  progressAnatomy,
-  radioCardAnatomy,
-  segmentGroupAnatomy,
-  selectAnatomy,
-  tableAnatomy,
-  tabsAnatomy,
-  timelineAnatomy,
-  toastAnatomy,
-} from '@chakra-ui/react/anatomy'
-
-import { defineTextStyles } from '@chakra-ui/react'
 
 const buttonSizes = defaultConfig.theme?.recipes?.button.variants?.size as Record<string, any>
 const inputSizes = defaultConfig.theme?.recipes?.input.variants?.size as Record<string, any>
