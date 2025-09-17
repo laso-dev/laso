@@ -1,10 +1,9 @@
-import z from 'zod'
-import { publicProcedure, router } from '../lib/trpc'
-import { prisma } from '../lib/prisma'
+import { protectedProcedure, router } from '../lib/trpc'
 
 export const authRouter = router({
-  exists: publicProcedure.input(z.object({ email: z.string() })).mutation(async ({ input }) => {
-    const user = await prisma.user.findFirst({ where: { email: input.email.trim() } })
-    return !!user
+  me: protectedProcedure.query(async ({ ctx }) => {
+    return {
+      user: { id: ctx.user.id },
+    }
   }),
 })
