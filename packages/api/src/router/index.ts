@@ -1,10 +1,11 @@
 import { z } from 'zod'
-import { router, publicProcedure, protectedProcedure } from '../lib/trpc'
+import { protectedProcedure, router } from '../lib/trpc'
 import { authRouter } from './auth'
+import { queuesRouter } from './queues'
 
 export const appRouter = router({
   auth: authRouter,
-
+  queues: queuesRouter,
   hello: protectedProcedure.input(z.string().nullish()).query(({ input, ctx }) => {
     return ctx.user.email
   }),

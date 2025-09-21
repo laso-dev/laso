@@ -5,17 +5,14 @@ import { trpc } from '../../lib/trpc'
 import { useNavigate } from '../../router'
 
 export default function Home() {
+  const queues = trpc.queues.browse.useQuery(null, { trpc: { context: { skipBatch: true } } })
   const hello = trpc.hello.useQuery()
-
   const navigate = useNavigate()
 
-  const logout = useMutation({
-    mutationFn: async () => authClient.signOut(),
-  })
+  const logout = useMutation({ mutationFn: async () => authClient.signOut() })
 
   return (
     <Stack>
-      <h1>Home {hello.data}</h1>
       <Button
         w="min"
         loading={logout.isPending}
@@ -26,6 +23,8 @@ export default function Home() {
       >
         Logout
       </Button>
+      <pre>{JSON.stringify(queues.data, null, 2)}</pre>
+      <pre>{JSON.stringify(hello.data, null, 2)}</pre>
     </Stack>
   )
 }
