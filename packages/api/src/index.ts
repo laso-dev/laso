@@ -16,7 +16,16 @@ app.use(
   }),
 )
 
-app.on(['POST', 'GET'], '/api/auth/*', (c) => auth.handler(c.req.raw))
+app.on(['POST', 'GET'], '/api/auth/*', async (c) => {
+  const response = await auth.handler(c.req.raw)
+
+  if (response instanceof Response) {
+    response.headers.set('Access-Control-Allow-Origin', 'http://localhost:5173')
+    response.headers.set('Access-Control-Allow-Credentials', 'true')
+  }
+
+  return response
+})
 
 app.use(
   '/trpc/*',

@@ -1,12 +1,12 @@
-import { Button, Stack } from '@chakra-ui/react'
+import { Box, Button, Stack } from '@chakra-ui/react'
 import { useMutation } from '@tanstack/react-query'
+import { JobCountsChart } from '../../components/chart-job-counts'
 import { authClient } from '../../lib/auth'
 import { trpc } from '../../lib/trpc'
 import { useNavigate } from '../../router'
 
 export default function Home() {
-  const queues = trpc.queues.browse.useQuery(null, { trpc: { context: { skipBatch: true } } })
-  const hello = trpc.hello.useQuery()
+  const stats = trpc.instance.stats.useQuery(null)
   const navigate = useNavigate()
 
   const logout = useMutation({ mutationFn: async () => authClient.signOut() })
@@ -23,8 +23,10 @@ export default function Home() {
       >
         Logout
       </Button>
-      <pre>{JSON.stringify(queues.data, null, 2)}</pre>
-      <pre>{JSON.stringify(hello.data, null, 2)}</pre>
+
+      <Stack w="xl" mx="auto">
+        <Box px="8">{stats.data && <JobCountsChart data={stats.data} />}</Box>
+      </Stack>
     </Stack>
   )
 }

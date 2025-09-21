@@ -23,7 +23,16 @@ export const queuesRouter = router({
           const queue = new Queue(q, { connection: { host: 'localhost', port: 6379 } })
           return {
             name: q,
-            metrics: await queue.getJobCounts(),
+            metrics: (await queue.getJobCounts()) as {
+              active: number
+              completed: number
+              delayed: number
+              failed: number
+              paused: number
+              prioritized: number
+              waiting: number
+              'waiting-children': number
+            },
           }
         }),
       )
