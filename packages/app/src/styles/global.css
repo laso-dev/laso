@@ -1,9 +1,10 @@
 :root {
-  --chakra-fonts-mono: 'JetBrains Mono Variable', monospace !important;
+  --chakra-fonts-mono: 'Geist Mono Variable', monospace !important;
 }
 
 body,
 #root {
   height: 100vh;
-  font-family: Inter, sans-serif !important;
+  font-family: 'Geist Variable', sans-serif !important;
+  /* font-family: Inter, sans-serif !important; */
 }
