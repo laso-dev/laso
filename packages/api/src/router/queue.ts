@@ -4,7 +4,7 @@ import { protectedProcedure, router } from '../lib/trpc'
 
 export const queuesRouter = router({
   browse: protectedProcedure.query(async ({ input }) => {
-    const redis = new Redis('redis://localhost:6379')
+    const redis = new Redis({ host: 'localhost', port: 6379 })
 
     try {
       // Get all keys that match BullMQ queue pattern

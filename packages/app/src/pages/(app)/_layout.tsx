@@ -15,7 +15,7 @@ export default function () {
       <Navigation />
 
       <Box p="3.5" flex="1" bg="bg.subtle">
-        <Box bg="bg.panel" rounded="xl" flex="1" h="full" shadow="xs" p="4">
+        <Box bg="bg.panel" rounded="xl" flex="1" h="full" shadow="xs" p="6">
           <Outlet />
         </Box>
       </Box>

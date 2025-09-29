@@ -34,7 +34,7 @@ export function JobCountsChart({ data }: JobCountsChartProps) {
   if (chart.data.length === 0) return <Text>No data</Text>
 
   return (
-    <BarSegment.Root chart={chart}>
+    <BarSegment.Root chart={chart} barSize="4">
       <BarSegment.Content>
         <BarSegment.Value />
         <BarSegment.Bar tooltip />
