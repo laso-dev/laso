@@ -1,6 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
-import globalCSS from '../styles.css?url'
+import globalCSS from '../styles/global.css?url'
 import { ColorModeProvider } from '../components/ui/color-mode'
 
 interface RouterContext {
