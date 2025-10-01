@@ -1,6 +1,9 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import type { QueryClient } from '@tanstack/react-query'
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import globalCSS from '../styles.css?url'
+import { system } from '../lib/theme'
+import { ColorModeProvider } from '../components/ui/color-mode'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -26,7 +29,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ChakraProvider value={system}>
+          <ColorModeProvider />
+          {children}
+        </ChakraProvider>
         <Scripts />
       </body>
     </html>

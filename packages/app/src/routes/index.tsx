@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
@@ -5,5 +6,5 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  return <div className="text-center">Hello World</div>
+  return <Button>Welcome</Button>
 }
