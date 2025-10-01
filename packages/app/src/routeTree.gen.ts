@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArchivedDemoTanstackQueryRouteImport } from './routes/_archived/demo.tanstack-query'
 import { Route as ArchivedApiDemoTqTodosRouteImport } from './routes/_archived/api.demo-tq-todos'
-import { Route as ArchivedApiDemoNamesRouteImport ./routes/_archived/api.demo-names.tsved/api.demo-names'
+import { Route as ArchivedApiDemoNamesRouteImport } from './routes/_archived/api.demo-names'
 import { Route as ArchivedDemoStartServerFuncsRouteImport } from './routes/_archived/demo.start.server-funcs'
 import { Route as ArchivedDemoStartApiRequestRouteImport } from './routes/_archived/demo.start.api-request'
 
