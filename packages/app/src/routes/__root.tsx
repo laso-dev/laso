@@ -1,12 +1,14 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import globalCSS from '../styles.css?url'
+import { ColorModeProvider } from '../components/ui/color-mode'
 
-interface MyRouterContext {
+interface RouterContext {
   queryClient: QueryClient
 }
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext<RouterContext>()({
+  ssr: false,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -21,8 +23,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <ColorModeProvider />
         <HeadContent />
       </head>
       <body>
