@@ -1,28 +1,29 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import { createRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
-import * as TanstackQuery from './integrations/tanstack-query/root-provider'
-
-// Import the generated route tree
+import { ColorModeProvider } from './components/ui/color-mode'
+import * as TanstackQuery from './lib/query'
+import { system } from './lib/theme'
 import { routeTree } from './routeTree.gen'
 
-// Create a new router instance
 export const getRouter = () => {
-  const rqContext = TanstackQuery.getContext()
+  const ctx = TanstackQuery.getContext()
 
   const router = createRouter({
     routeTree,
-    context: { ...rqContext },
+    context: { ...ctx },
     defaultPreload: 'intent',
     Wrap: (props: { children: React.ReactNode }) => {
       return (
-        <TanstackQuery.Provider {...rqContext}>
-          {props.children}
-        </TanstackQuery.Provider>
+        <ChakraProvider value={system}>
+          <ColorModeProvider />
+          <TanstackQuery.Provider {...ctx}>{props.children}</TanstackQuery.Provider>
+        </ChakraProvider>
       )
     },
   })
 
-  setupRouterSsrQueryIntegration({ router, queryClient: rqContext.queryClient })
+  setupRouterSsrQueryIntegration({ router, queryClient: ctx.queryClient })
 
   return router
 }
