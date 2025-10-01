@@ -8,107 +8,35 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ArchivedDemoTanstackQueryRouteImport } from './routes/_archived/demo.tanstack-query'
-import { Route as ArchivedApiDemoTqTodosRouteImport } from './routes/_archived/api.demo-tq-todos'
-import { Route as ArchivedApiDemoNamesRouteImport } from './routes/_archived/api.demo-names'
-import { Route as ArchivedDemoStartServerFuncsRouteImport } from './routes/_archived/demo.start.server-funcs'
-import { Route as ArchivedDemoStartApiRequestRouteImport } from './routes/_archived/demo.start.api-request'
+import { Route as rootRouteImport } from './routes/_app'
+import { Route as indexRouteImport } from './routes/index'
 
-const IndexRoute = IndexRouteImport.update({
+const indexRoute = indexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArchivedDemoTanstackQueryRoute =
-  ArchivedDemoTanstackQueryRouteImport.update({
-    id: '/_archived/demo/tanstack-query',
-    path: '/demo/tanstack-query',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ArchivedApiDemoTqTodosRoute = ArchivedApiDemoTqTodosRouteImport.update({
-  id: '/_archived/api/demo-tq-todos',
-  path: '/api/demo-tq-todos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArchivedApiDemoNamesRoute = ArchivedApiDemoNamesRouteImport.update({
-  id: '/_archived/api/demo-names',
-  path: '/api/demo-names',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArchivedDemoStartServerFuncsRoute =
-  ArchivedDemoStartServerFuncsRouteImport.update({
-    id: '/_archived/demo/start/server-funcs',
-    path: '/demo/start/server-funcs',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ArchivedDemoStartApiRequestRoute =
-  ArchivedDemoStartApiRequestRouteImport.update({
-    id: '/_archived/demo/start/api-request',
-    path: '/demo/start/api-request',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
-  '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
+  '/': typeof indexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
-  '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
+  '/': typeof indexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_archived/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/_archived/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/_archived/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
-  '/_archived/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/_archived/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
+  '/': typeof indexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/api/demo-names'
-    | '/api/demo-tq-todos'
-    | '/demo/tanstack-query'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/api/demo-names'
-    | '/api/demo-tq-todos'
-    | '/demo/tanstack-query'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
-  id:
-    | '__root__'
-    | '/'
-    | '/_archived/api/demo-names'
-    | '/_archived/api/demo-tq-todos'
-    | '/_archived/demo/tanstack-query'
-    | '/_archived/demo/start/api-request'
-    | '/_archived/demo/start/server-funcs'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ArchivedApiDemoNamesRoute: typeof ArchivedApiDemoNamesRoute
-  ArchivedApiDemoTqTodosRoute: typeof ArchivedApiDemoTqTodosRoute
-  ArchivedDemoTanstackQueryRoute: typeof ArchivedDemoTanstackQueryRoute
-  ArchivedDemoStartApiRequestRoute: typeof ArchivedDemoStartApiRequestRoute
-  ArchivedDemoStartServerFuncsRoute: typeof ArchivedDemoStartServerFuncsRoute
+  indexRoute: typeof indexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,54 +45,14 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/demo/tanstack-query': {
-      id: '/_archived/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof ArchivedDemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/api/demo-tq-todos': {
-      id: '/_archived/api/demo-tq-todos'
-      path: '/api/demo-tq-todos'
-      fullPath: '/api/demo-tq-todos'
-      preLoaderRoute: typeof ArchivedApiDemoTqTodosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/api/demo-names': {
-      id: '/_archived/api/demo-names'
-      path: '/api/demo-names'
-      fullPath: '/api/demo-names'
-      preLoaderRoute: typeof ArchivedApiDemoNamesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/demo/start/server-funcs': {
-      id: '/_archived/demo/start/server-funcs'
-      path: '/demo/start/server-funcs'
-      fullPath: '/demo/start/server-funcs'
-      preLoaderRoute: typeof ArchivedDemoStartServerFuncsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/demo/start/api-request': {
-      id: '/_archived/demo/start/api-request'
-      path: '/demo/start/api-request'
-      fullPath: '/demo/start/api-request'
-      preLoaderRoute: typeof ArchivedDemoStartApiRequestRouteImport
+      preLoaderRoute: typeof indexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ArchivedApiDemoNamesRoute: ArchivedApiDemoNamesRoute,
-  ArchivedApiDemoTqTodosRoute: ArchivedApiDemoTqTodosRoute,
-  ArchivedDemoTanstackQueryRoute: ArchivedDemoTanstackQueryRoute,
-  ArchivedDemoStartApiRequestRoute: ArchivedDemoStartApiRequestRoute,
-  ArchivedDemoStartServerFuncsRoute: ArchivedDemoStartServerFuncsRoute,
+  indexRoute: indexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

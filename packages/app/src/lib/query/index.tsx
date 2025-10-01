@@ -6,8 +6,8 @@ export function getContext() {
 }
 
 export function Provider({
-  children,
   queryClient,
+  children,
 }: {
   children: React.ReactNode
   queryClient: QueryClient

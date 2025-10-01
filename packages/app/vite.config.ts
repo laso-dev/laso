@@ -8,7 +8,11 @@ const config = defineConfig({
   plugins: [
     viteTsConfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      router:{
+        virtualRouteConfig: './src/routes.ts'
+      }
+    }),
     viteReact(),
   ],
 })
