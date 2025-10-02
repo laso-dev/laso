@@ -1,14 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-
-const getUsers = createServerFn({ method: 'GET' }).handler(async () => {
-  return [{ id: 1, name: 'John Doe', email: 'john@example.com' }] as const
-})
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
-  loader: async (): Promise<{ users: Array<{ id: number; name: string; email: string }> }> => {
-    const users = await getUsers()
+  loader: async () => {
     return { users: [{ id: 1, name: 'John Doe', email: 'john@example.com' }] }
   },
 })
