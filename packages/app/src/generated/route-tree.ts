@@ -8,17 +8,18 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/_auth'
-import { Route as AppRouteImport } from './routes/_app'
-import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
-import { Route as AuthSignInRouteImport } from './routes/_auth.sign-in'
-import { Route as AppHomeRouteImport } from './routes/_app.home'
-import { Route as ArchivedDemoTanstackQueryRouteImport } from './routes/_archived/demo.tanstack-query'
-import { Route as ArchivedApiDemoTqTodosRouteImport } from './routes/_archived/api.demo-tq-todos'
-import { Route as ArchivedApiDemoNamesRouteImport } from './routes/_archived/api.demo-names'
-import { Route as ArchivedDemoStartServerFuncsRouteImport } from './routes/_archived/demo.start.server-funcs'
-import { Route as ArchivedDemoStartApiRequestRouteImport } from './routes/_archived/demo.start.api-request'
+import { Route as rootRouteImport } from './../routes/__root'
+import { Route as AuthRouteImport } from './../routes/_auth'
+import { Route as AppRouteImport } from './../routes/_app'
+import { Route as IndexRouteImport } from './../routes/index'
+import { Route as AuthSignUpRouteImport } from './../routes/_auth.sign-up'
+import { Route as AuthSignInRouteImport } from './../routes/_auth.sign-in'
+import { Route as AppHomeRouteImport } from './../routes/_app.home'
+import { Route as ArchivedDemoTanstackQueryRouteImport } from './../routes/_archived/demo.tanstack-query'
+import { Route as ArchivedApiDemoTqTodosRouteImport } from './../routes/_archived/api.demo-tq-todos'
+import { Route as ArchivedApiDemoNamesRouteImport } from './../routes/_archived/api.demo-names'
+import { Route as ArchivedDemoStartServerFuncsRouteImport } from './../routes/_archived/demo.start.server-funcs'
+import { Route as ArchivedDemoStartApiRequestRouteImport } from './../routes/_archived/demo.start.api-request'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
@@ -26,6 +27,11 @@ const AuthRoute = AuthRouteImport.update({
 } as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
@@ -73,6 +79,7 @@ const ArchivedDemoStartApiRequestRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/home': typeof AppHomeRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/home': typeof AppHomeRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_app/home': typeof AppHomeRoute
@@ -108,6 +117,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/home'
     | '/sign-in'
     | '/sign-up'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/home'
     | '/sign-in'
     | '/sign-up'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/demo/start/server-funcs'
   id:
     | '__root__'
+    | '/'
     | '/_app'
     | '/_auth'
     | '/_app/home'
@@ -141,6 +153,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
   ArchivedApiDemoNamesRoute: typeof ArchivedApiDemoNamesRoute
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/sign-up': {
@@ -248,6 +268,7 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
   ArchivedApiDemoNamesRoute: ArchivedApiDemoNamesRoute,
@@ -260,7 +281,7 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
+import type { getRouter } from '../router.tsx'
 import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {

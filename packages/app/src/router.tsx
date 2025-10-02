@@ -1,9 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { createRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
+import { routeTree } from './generated/route-tree'
 import * as TanstackQuery from './lib/query'
 import { system } from './lib/theme'
-import { routeTree } from './routeTree.gen'
 
 export const getRouter = () => {
   const ctx = TanstackQuery.getContext()

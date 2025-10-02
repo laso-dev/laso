@@ -22,7 +22,7 @@ async function readTodos() {
 
 const getTodos = createServerFn({
   method: 'GET',
-}).handler(async () => await readTodos())
+}).handler(async () => [{id:1}])
 
 const addTodo = createServerFn({ method: 'POST' })
   .inputValidator((d: string) => d)
