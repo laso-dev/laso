@@ -11,15 +11,11 @@
 import { Route as rootRouteImport } from './../routes/__root'
 import { Route as AuthRouteImport } from './../routes/_auth'
 import { Route as AppRouteImport } from './../routes/_app'
+import { Route as IndexRouteImport } from './../routes/index'
 import { Route as AuthSignUpRouteImport } from './../routes/_auth.sign-up'
 import { Route as AuthSignInRouteImport } from './../routes/_auth.sign-in'
 import { Route as AppHomeRouteImport } from './../routes/_app.home'
 import { Route as ApiAuthSplatRouteImport } from './../routes/api.auth.$'
-import { Route as ArchivedDemoTanstackQueryRouteImport } from './../routes/_archived/demo.tanstack-query'
-import { Route as ArchivedApiDemoTqTodosRouteImport } from './../routes/_archived/api.demo-tq-todos'
-import { Route as ArchivedApiDemoNamesRouteImport } from './../routes/_archived/api.demo-names'
-import { Route as ArchivedDemoStartServerFuncsRouteImport } from './../routes/_archived/demo.start.server-funcs'
-import { Route as ArchivedDemoStartApiRequestRouteImport } from './../routes/_archived/demo.start.api-request'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
@@ -27,6 +23,11 @@ const AuthRoute = AuthRouteImport.update({
 } as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
@@ -49,118 +50,52 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArchivedDemoTanstackQueryRoute =
-  ArchivedDemoTanstackQueryRouteImport.update({
-    id: '/_archived/demo/tanstack-query',
-    path: '/demo/tanstack-query',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ArchivedApiDemoTqTodosRoute = ArchivedApiDemoTqTodosRouteImport.update({
-  id: '/_archived/api/demo-tq-todos',
-  path: '/api/demo-tq-todos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArchivedApiDemoNamesRoute = ArchivedApiDemoNamesRouteImport.update({
-  id: '/_archived/api/demo-names',
-  path: '/api/demo-names',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArchivedDemoStartServerFuncsRoute =
-  ArchivedDemoStartServerFuncsRouteImport.update({
-    id: '/_archived/demo/start/server-funcs',
-    path: '/demo/start/server-funcs',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ArchivedDemoStartApiRequestRoute =
-  ArchivedDemoStartApiRequestRouteImport.update({
-    id: '/_archived/demo/start/api-request',
-    path: '/demo/start/api-request',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/home': typeof AppHomeRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/home': typeof AppHomeRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_app/home': typeof AppHomeRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
-  '/_archived/api/demo-names': typeof ArchivedApiDemoNamesRoute
-  '/_archived/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
-  '/_archived/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/_archived/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
-  '/_archived/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/home'
-    | '/sign-in'
-    | '/sign-up'
-    | '/api/demo-names'
-    | '/api/demo-tq-todos'
-    | '/demo/tanstack-query'
-    | '/api/auth/$'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
+  fullPaths: '/' | '/home' | '/sign-in' | '/sign-up' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/home'
-    | '/sign-in'
-    | '/sign-up'
-    | '/api/demo-names'
-    | '/api/demo-tq-todos'
-    | '/demo/tanstack-query'
-    | '/api/auth/$'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
+  to: '/' | '/home' | '/sign-in' | '/sign-up' | '/api/auth/$'
   id:
     | '__root__'
+    | '/'
     | '/_app'
     | '/_auth'
     | '/_app/home'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
-    | '/_archived/api/demo-names'
-    | '/_archived/api/demo-tq-todos'
-    | '/_archived/demo/tanstack-query'
     | '/api/auth/$'
-    | '/_archived/demo/start/api-request'
-    | '/_archived/demo/start/server-funcs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
-  ArchivedApiDemoNamesRoute: typeof ArchivedApiDemoNamesRoute
-  ArchivedApiDemoTqTodosRoute: typeof ArchivedApiDemoTqTodosRoute
-  ArchivedDemoTanstackQueryRoute: typeof ArchivedDemoTanstackQueryRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ArchivedDemoStartApiRequestRoute: typeof ArchivedDemoStartApiRequestRoute
-  ArchivedDemoStartServerFuncsRoute: typeof ArchivedDemoStartServerFuncsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -177,6 +112,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/sign-up': {
@@ -207,41 +149,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_archived/demo/tanstack-query': {
-      id: '/_archived/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof ArchivedDemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/api/demo-tq-todos': {
-      id: '/_archived/api/demo-tq-todos'
-      path: '/api/demo-tq-todos'
-      fullPath: '/api/demo-tq-todos'
-      preLoaderRoute: typeof ArchivedApiDemoTqTodosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/api/demo-names': {
-      id: '/_archived/api/demo-names'
-      path: '/api/demo-names'
-      fullPath: '/api/demo-names'
-      preLoaderRoute: typeof ArchivedApiDemoNamesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/demo/start/server-funcs': {
-      id: '/_archived/demo/start/server-funcs'
-      path: '/demo/start/server-funcs'
-      fullPath: '/demo/start/server-funcs'
-      preLoaderRoute: typeof ArchivedDemoStartServerFuncsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_archived/demo/start/api-request': {
-      id: '/_archived/demo/start/api-request'
-      path: '/demo/start/api-request'
-      fullPath: '/demo/start/api-request'
-      preLoaderRoute: typeof ArchivedDemoStartApiRequestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -268,14 +175,10 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
-  ArchivedApiDemoNamesRoute: ArchivedApiDemoNamesRoute,
-  ArchivedApiDemoTqTodosRoute: ArchivedApiDemoTqTodosRoute,
-  ArchivedDemoTanstackQueryRoute: ArchivedDemoTanstackQueryRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ArchivedDemoStartApiRequestRoute: ArchivedDemoStartApiRequestRoute,
-  ArchivedDemoStartServerFuncsRoute: ArchivedDemoStartServerFuncsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

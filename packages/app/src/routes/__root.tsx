@@ -1,10 +1,13 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
-import globalCSS from '../styles/global.css?url'
+import { Session, User } from 'better-auth'
 import { ColorModeProvider } from '../components/ui/color-mode'
+import globalCSS from '../styles/global.css?url'
 
 interface RouterContext {
   queryClient: QueryClient
+  session?: Session
+  user?: User
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({

@@ -10,7 +10,11 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    context: { ...ctx },
+    context: {
+      ...ctx,
+      session: undefined,
+      user: undefined,
+    },
     defaultPreload: 'intent',
     Wrap: (props: { children: React.ReactNode }) => {
       return (

@@ -2,13 +2,16 @@ import { Button, HStack, Spinner } from '@chakra-ui/react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import { db } from '../lib/db'
 import { useSession } from '../hooks/use-session'
 import { authClient } from '../lib/auth/client'
+import { authMiddleware } from '../lib/auth/middleware'
+import { db } from '../lib/db'
 
-const getUsers = createServerFn({ method: 'GET' }).handler(async () => {
-  return db.selectFrom('user').selectAll().execute()
-})
+const getUsers = createServerFn({ method: 'GET' })
+  .middleware([authMiddleware])
+  .handler(async () => {
+    return db.selectFrom('user').selectAll().execute()
+  })
 
 export const Route = createFileRoute('/_app/home')({
   component: RouteComponent,
