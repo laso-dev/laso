@@ -14,6 +14,7 @@ import { Route as AppRouteImport } from './../routes/_app'
 import { Route as AuthSignUpRouteImport } from './../routes/_auth.sign-up'
 import { Route as AuthSignInRouteImport } from './../routes/_auth.sign-in'
 import { Route as AppHomeRouteImport } from './../routes/_app.home'
+import { Route as ApiAuthSplatRouteImport } from './../routes/api.auth.$'
 import { Route as ArchivedDemoTanstackQueryRouteImport } from './../routes/_archived/demo.tanstack-query'
 import { Route as ArchivedApiDemoTqTodosRouteImport } from './../routes/_archived/api.demo-tq-todos'
 import { Route as ArchivedApiDemoNamesRouteImport } from './../routes/_archived/api.demo-names'
@@ -42,6 +43,11 @@ const AppHomeRoute = AppHomeRouteImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => AppRoute,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ArchivedDemoTanstackQueryRoute =
   ArchivedDemoTanstackQueryRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/api/demo-names': typeof ArchivedApiDemoNamesRoute
   '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
   '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/api/demo-names': typeof ArchivedApiDemoNamesRoute
   '/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
   '/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/_archived/api/demo-names': typeof ArchivedApiDemoNamesRoute
   '/_archived/api/demo-tq-todos': typeof ArchivedApiDemoTqTodosRoute
   '/_archived/demo/tanstack-query': typeof ArchivedDemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/_archived/demo/start/api-request': typeof ArchivedDemoStartApiRequestRoute
   '/_archived/demo/start/server-funcs': typeof ArchivedDemoStartServerFuncsRoute
 }
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/api/demo-names'
     | '/api/demo-tq-todos'
     | '/demo/tanstack-query'
+    | '/api/auth/$'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
     | '/api/demo-names'
     | '/api/demo-tq-todos'
     | '/demo/tanstack-query'
+    | '/api/auth/$'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
   id:
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/_archived/api/demo-names'
     | '/_archived/api/demo-tq-todos'
     | '/_archived/demo/tanstack-query'
+    | '/api/auth/$'
     | '/_archived/demo/start/api-request'
     | '/_archived/demo/start/server-funcs'
   fileRoutesById: FileRoutesById
@@ -146,6 +158,7 @@ export interface RootRouteChildren {
   ArchivedApiDemoNamesRoute: typeof ArchivedApiDemoNamesRoute
   ArchivedApiDemoTqTodosRoute: typeof ArchivedApiDemoTqTodosRoute
   ArchivedDemoTanstackQueryRoute: typeof ArchivedDemoTanstackQueryRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ArchivedDemoStartApiRequestRoute: typeof ArchivedDemoStartApiRequestRoute
   ArchivedDemoStartServerFuncsRoute: typeof ArchivedDemoStartServerFuncsRoute
 }
@@ -186,6 +199,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/home'
       preLoaderRoute: typeof AppHomeRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_archived/demo/tanstack-query': {
       id: '/_archived/demo/tanstack-query'
@@ -253,6 +273,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArchivedApiDemoNamesRoute: ArchivedApiDemoNamesRoute,
   ArchivedApiDemoTqTodosRoute: ArchivedApiDemoTqTodosRoute,
   ArchivedDemoTanstackQueryRoute: ArchivedDemoTanstackQueryRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
   ArchivedDemoStartApiRequestRoute: ArchivedDemoStartApiRequestRoute,
   ArchivedDemoStartServerFuncsRoute: ArchivedDemoStartServerFuncsRoute,
 }
