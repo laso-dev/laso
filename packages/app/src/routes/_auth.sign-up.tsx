@@ -45,9 +45,9 @@ function RouteComponent() {
   })
 
   return (
-    <Flex alignItems="center" maxW="md" mx="auto" py={{ base: '8', md: '12' }} h="full" px="8">
+    <Flex w="full" alignItems="center">
       <Stack gap="0" w="full">
-        <Text as="h1" fontWeight="medium" mt="8" fontSize="lg">
+        <Text as="h1" fontWeight="medium" fontSize="md">
           Sign up
         </Text>
         <Text color="fg.muted">Create an account to get started</Text>

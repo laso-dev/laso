@@ -44,10 +44,9 @@ function RouteComponent() {
   })
 
   return (
-    <Flex alignItems="center" maxW="md" mx="auto" py={{ base: '8', md: '12' }} h="full" px="8">
+    <Flex>
       <Stack gap="0" w="full">
-        {/* <Logo /> */}
-        <Text as="h1" fontWeight="medium" mt="8" fontSize="lg">
+        <Text as="h1" fontWeight="medium" fontSize="md">
           Sign in
         </Text>
         <Text color="fg.muted">Welcome back</Text>

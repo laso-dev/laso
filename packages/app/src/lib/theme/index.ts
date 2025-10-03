@@ -1,4 +1,5 @@
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
+import { cardAnatomy } from '@chakra-ui/react/anatomy'
 
 const buttonSizes = defaultConfig.theme?.recipes?.button.variants?.size as Record<string, any>
 const inputSizes = defaultConfig.theme?.recipes?.input.variants?.size as Record<string, any>
@@ -52,7 +53,16 @@ const theme = defineConfig({
         },
       },
     },
-    slotRecipes: {},
+    slotRecipes: {
+      card: {
+        slots: cardAnatomy.keys(),
+        base: {
+          root: {
+            borderRadius: '0',
+          },
+        },
+      },
+    },
     semanticTokens: {
       colors: {},
     },
