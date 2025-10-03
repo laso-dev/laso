@@ -20,33 +20,25 @@ const theme = defineConfig({
       },
       text: {
         base: { fontSize: 'sm' },
-        variants: {
-          size: {
-            xs: { fontSize: '2xs' },
-            sm: { fontSize: 'xs' },
-            md: { fontSize: 'sm' },
-            lg: { fontSize: 'md' },
-            xl: { fontSize: 'lg' },
-          },
-        },
       },
 
       input: {
+        base: { rounded: 'none' },
         variants: {
           size: {
-            sm: { ...inputSizes.xs },
-            md: { ...inputSizes.sm },
-            lg: { ...inputSizes.md },
-            xl: { ...inputSizes.lg },
+            sm: { ...inputSizes['2xs'] },
+            md: { ...inputSizes.xs },
+            lg: { ...inputSizes.sm },
+            xl: { ...inputSizes.md },
           },
         },
       },
       button: {
+        base: { rounded: 'none' },
         variants: {
           size: {
-            xs: { ...buttonSizes['2xs'] },
-            sm: { ...buttonSizes.xs },
-            md: { ...buttonSizes.sm },
+            sm: { ...buttonSizes['2xs'] },
+            md: { ...buttonSizes['xs'] },
             lg: { ...buttonSizes.md },
             xl: { ...buttonSizes.lg },
           },

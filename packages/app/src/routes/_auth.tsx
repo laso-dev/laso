@@ -26,7 +26,7 @@ function RouteComponent() {
         },
       }}
     >
-      <Stack w="lg" m="auto">
+      <Stack w="md" m="auto">
         <Flex alignItems="start" justifyContent="start">
           <Logo />
         </Flex>

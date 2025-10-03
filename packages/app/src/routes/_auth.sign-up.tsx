@@ -45,35 +45,31 @@ function RouteComponent() {
   })
 
   return (
-    <Flex w="full" alignItems="center">
-      <Stack gap="0" w="full">
-        <Text as="h1" fontWeight="medium" fontSize="md">
-          Sign up
-        </Text>
-        <Text color="fg.muted">Create an account to get started</Text>
-        <form onSubmit={onSubmit}>
-          <Stack gap="4" mt="6">
-            <Field label="Name">
-              <Input {...form.register('name')} />
-            </Field>
-            <Field label="Email">
-              <Input {...form.register('email')} />
-            </Field>
-            <Field label="Password">
-              <PasswordInput {...form.register('password')} />
-            </Field>
-            <Button type="submit" loading={signUp.isPending}>
-              Create account
-            </Button>
-            <Text color="fg.muted" fontSize="xs">
-              Already have an account?
-              <ChakraLink variant="underline" as={Link} href="/sign-in">
-                Sign in
-              </ChakraLink>
-            </Text>
-          </Stack>
-        </form>
-      </Stack>
-    </Flex>
+    <Stack gap="0" w="full">
+      <Text fontWeight="medium">Sign up</Text>
+      <Text color="fg.muted">Create an account to get started</Text>
+      <form onSubmit={onSubmit}>
+        <Stack gap="4" mt="6">
+          <Field label="Name">
+            <Input {...form.register('name')} />
+          </Field>
+          <Field label="Email">
+            <Input {...form.register('email')} />
+          </Field>
+          <Field label="Password">
+            <PasswordInput {...form.register('password')} />
+          </Field>
+          <Button type="submit" loading={signUp.isPending}>
+            Create account
+          </Button>
+          <Text color="fg.muted" fontSize="xs" display="inline-flex" gap="1">
+            Already have an account?
+            <ChakraLink variant="underline" as={Link} href="/sign-in">
+              Sign in
+            </ChakraLink>
+          </Text>
+        </Stack>
+      </form>
+    </Stack>
   )
 }

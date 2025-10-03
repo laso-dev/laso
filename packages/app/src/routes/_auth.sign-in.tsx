@@ -44,32 +44,28 @@ function RouteComponent() {
   })
 
   return (
-    <Flex>
-      <Stack gap="0" w="full">
-        <Text as="h1" fontWeight="medium" fontSize="md">
-          Sign in
-        </Text>
-        <Text color="fg.muted">Welcome back</Text>
-        <form onSubmit={onSubmit}>
-          <Stack gap="4" mt="6">
-            <Field label="Email">
-              <Input {...form.register('email')} />
-            </Field>
-            <Field label="Password">
-              <PasswordInput {...form.register('password')} />
-            </Field>
-            <Button type="submit" loading={signIn.isPending}>
-              Sign in
-            </Button>
-            <Text color="fg.muted" fontSize="xs">
-              Already have an account?
-              <ChakraLink variant="underline" as={Link} href="/sign-up">
-                Sign up
-              </ChakraLink>
-            </Text>
-          </Stack>
-        </form>
-      </Stack>
-    </Flex>
+    <Stack gap="0" w="full">
+      <Text fontWeight="medium">Sign in</Text>
+      <Text color="fg.muted">Welcome back</Text>
+      <form onSubmit={onSubmit}>
+        <Stack gap="4" mt="6">
+          <Field label="Email">
+            <Input {...form.register('email')} />
+          </Field>
+          <Field label="Password">
+            <PasswordInput {...form.register('password')} />
+          </Field>
+          <Button type="submit" loading={signIn.isPending}>
+            Sign in
+          </Button>
+          <Text color="fg.muted" fontSize="xs" display="inline-flex" gap="1">
+            Already have an account?
+            <ChakraLink variant="underline" as={Link} href="/sign-up">
+              Sign up
+            </ChakraLink>
+          </Text>
+        </Stack>
+      </form>
+    </Stack>
   )
 }
