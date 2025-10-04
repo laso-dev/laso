@@ -14,7 +14,8 @@ import { Route as AppRouteImport } from './../routes/_app'
 import { Route as IndexRouteImport } from './../routes/index'
 import { Route as AuthSignUpRouteImport } from './../routes/_auth.sign-up'
 import { Route as AuthSignInRouteImport } from './../routes/_auth.sign-in'
-import { Route as AppDashboardRouteImport } f../routes/_app.dashboard.tsx.dashboard'
+import { Route as AppJobsRouteImport } from './../routes/_app.jobs'
+import { Route as AppDashboardRouteImport } from './../routes/_app.dashboard'
 import { Route as ApiAuthSplatRouteImport } from './../routes/api.auth.$'
 
 const AuthRoute = AuthRouteImport.update({
@@ -40,6 +41,11 @@ const AuthSignInRoute = AuthSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => AuthRoute,
 } as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -54,6 +60,7 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/jobs': typeof AppJobsRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -61,6 +68,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/jobs': typeof AppJobsRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -71,21 +79,29 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/jobs': typeof AppJobsRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/sign-in' | '/sign-up' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/jobs'
+    | '/sign-in'
+    | '/sign-up'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/sign-in' | '/sign-up' | '/api/auth/$'
+  to: '/' | '/dashboard' | '/jobs' | '/sign-in' | '/sign-up' | '/api/auth/$'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_auth'
     | '/_app/dashboard'
+    | '/_app/jobs'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
     | '/api/auth/$'
@@ -135,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignInRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_app/jobs': {
+      id: '/_app/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -154,10 +177,12 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppJobsRoute: typeof AppJobsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppJobsRoute: AppJobsRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

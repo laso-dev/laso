@@ -1,11 +1,11 @@
-import { Flex, Icon, IconProps, Text, TextProps } from '@chakra-ui/react'
+import { Flex, FlexProps, Icon, IconProps, Text, TextProps } from '@chakra-ui/react'
 import { PiScribbleLoopBold } from 'react-icons/pi'
 
 export type LogoProps = {
   iconProps?: IconProps
   textProps?: TextProps
   size?: 'sm' | 'md' | 'lg'
-}
+} & FlexProps
 
 const sizeMap = {
   sm: { icon: 5, text: 'md', gap: 1.5 },
@@ -14,11 +14,11 @@ const sizeMap = {
 }
 
 export function Logo(props: LogoProps) {
-  const { iconProps, textProps, size = 'md' } = props
+  const { iconProps, textProps, size = 'md', ...rest } = props
   const { icon, text, gap } = sizeMap[size]
 
   return (
-    <Flex gap={gap} alignItems="center">
+    <Flex gap={gap} alignItems="center" {...rest}>
       <Icon rotate="-15deg" boxSize={icon} {...iconProps} color="fg.warning">
         <PiScribbleLoopBold />
       </Icon>
