@@ -39,7 +39,7 @@ function RouteComponent() {
     if (error) {
       toaster.error({ title: error.message || 'Something went wrong' })
     } else {
-      navigate({ to: '/home' })
+      navigate({ to: '/dashboard' })
     }
   })
 

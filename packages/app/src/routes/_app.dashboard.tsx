@@ -13,7 +13,7 @@ const getUsers = createServerFn({ method: 'GET' })
     return db.selectFrom('user').selectAll().execute()
   })
 
-export const Route = createFileRoute('/_app/home')({
+export const Route = createFileRoute('/_app/dashboard')({
   component: RouteComponent,
   loader: async () => {
     return {
