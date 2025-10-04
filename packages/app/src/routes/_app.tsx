@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, HStack, Span, Stack } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Span, Stack } from '@chakra-ui/react'
 import { createFileRoute, Outlet, redirect, useLocation, useNavigate } from '@tanstack/react-router'
 import { Logo } from '../components/logo'
 import { authClient } from '../lib/auth/client'
