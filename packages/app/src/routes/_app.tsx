@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, HStack, Span, Stack } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, HStack, Span, Stack } from '@chakra-ui/react'
 import { createFileRoute, Outlet, redirect, useLocation, useNavigate } from '@tanstack/react-router'
 import { Logo } from '../components/logo'
 import { authClient } from '../lib/auth/client'
@@ -39,7 +39,6 @@ function RouteComponent() {
             return (
               <Button
                 fontFamily="mono"
-                color="fg.muted"
                 px="3"
                 h="full"
                 key={menu.label}
@@ -51,7 +50,14 @@ function RouteComponent() {
                 }}
               >
                 {isActive && (
-                  <Span bg="bg.inverted/70" w="full" h="0.5" pos="absolute" bottom="-2px" left="0"></Span>
+                  <Span
+                    bg="bg.inverted/70"
+                    w="full"
+                    h="0.5"
+                    pos="absolute"
+                    bottom="-2px"
+                    left="0"
+                  ></Span>
                 )}
                 {menu.label}
               </Button>
@@ -60,8 +66,9 @@ function RouteComponent() {
         </HStack>
       </Flex>
 
-      <Heading size="xl">App</Heading>
-      <Outlet />
+      <Box p="10">
+        <Outlet />
+      </Box>
     </Stack>
   )
 }
