@@ -27,8 +27,7 @@ function RouteComponent() {
   const navigate = useNavigate()
 
   return (
-    <Stack>
-      {/* navbar */}
+    <Stack gap='0'>
       <Flex px="4" h="12" borderBottomWidth="1px" borderColor="border.emphasized/40" bg="bg.panel">
         <Logo textProps={{ hidden: true }} px="2" />
 
@@ -45,6 +44,7 @@ function RouteComponent() {
                 variant="ghost"
                 size="sm"
                 pos="relative"
+                mb='-0.5'
                 onClick={() => {
                   navigate({ to: menu.href })
                 }}
@@ -55,7 +55,7 @@ function RouteComponent() {
                     w="full"
                     h="0.5"
                     pos="absolute"
-                    bottom="-2px"
+                    bottom="-1px"
                     left="0"
                   ></Span>
                 )}
@@ -66,9 +66,7 @@ function RouteComponent() {
         </HStack>
       </Flex>
 
-      <Box p="10">
-        <Outlet />
-      </Box>
+      <Outlet />
     </Stack>
   )
 }

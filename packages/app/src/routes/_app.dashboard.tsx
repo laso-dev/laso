@@ -1,4 +1,4 @@
-import { Button, HStack, Spinner } from '@chakra-ui/react'
+import { Button, Flex, HStack, NativeSelect, Select, Spinner, Stack, Text } from '@chakra-ui/react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
@@ -36,31 +36,28 @@ function RouteComponent() {
   })
 
   return (
-    <div className="p-10">
-      <HStack>
-        <h1>Users</h1>
-        <Spinner hidden={!users.isFetching} />
-      </HStack>
-
-      <h2>Welcome, {session.data?.user.name}</h2>
-      <ul>
-        {users.data?.map((user) => (
-          <li key={user.id}>
-            {user.name || 'Na'} - <pre style={{ display: 'inline' }}>{user.email}</pre>
-          </li>
-        ))}
-      </ul>
-      <br />
-      <br />
-      <Button
-        mr="4"
-        onClick={() => {
-          users.refetch()
-        }}
+    <Stack>
+      <Flex
+        alignItems="center"
+        h="12"
+        bg="bg.panel"
+        borderBottomWidth="1px"
+        borderColor="border.emphasized/40"
+        px="4"
       >
-        Refetch
-      </Button>
+        <Text fontFamily="mono">Dashboard</Text>
+
+        <NativeSelect.Root size="xs" key={1} w="52" ml="auto">
+          <NativeSelect.Field value={'ok'}>
+            <option value={'ok'}>Ok</option>
+            <option value={'not ok'}>Not Ok</option>
+            <option value={'maybe ok'}>Maybe Ok</option>
+          </NativeSelect.Field>
+          <NativeSelect.Indicator />
+        </NativeSelect.Root>
+      </Flex>
       <Button
+        hidden
         onClick={async () => {
           await authClient.signOut({})
           qc.clear()
@@ -69,6 +66,6 @@ function RouteComponent() {
       >
         Logout
       </Button>
-    </div>
+    </Stack>
   )
 }
