@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn, useServerFn } from '@tanstack/react-start'
 import { LuDatabase, LuPlus, LuSquarePen } from 'react-icons/lu'
+import { CreateInstanceDialog } from '../components/dialog-create-instance'
 import { authMiddleware } from '../lib/auth/middleware'
 import { db } from '../lib/db'
 
@@ -45,9 +46,7 @@ function RouteComponent() {
     initialData: data.instances,
   })
 
-  const create = useMutation({
-    mutationFn: useServerFn(createInstance),
-  })
+  const create = useMutation({ mutationFn: useServerFn(createInstance) })
 
   const emptyMarkup = instances.isSuccess && instances?.data?.length === 0 && (
     <Center h="full">
@@ -91,15 +90,11 @@ function RouteComponent() {
           Instances
         </Text>
 
-        <Button
-          ml="auto"
-          onClick={() => {
-            create.mutateAsync({})
-            instances.refetch()
-          }}
-        >
-          <LuPlus /> Add
-        </Button>
+        <CreateInstanceDialog>
+          <Button ml="auto">
+            <LuPlus /> Add
+          </Button>
+        </CreateInstanceDialog>
       </Flex>
 
       {emptyMarkup}
@@ -108,7 +103,7 @@ function RouteComponent() {
         <Container maxW="4xl" my="8">
           <Stack>
             {instances.data.map((instance) => (
-              <HStack h="12">
+              <HStack h="12" key={instance.id}>
                 <Text fontFamily="mono">{instance.name}</Text>
                 <Button size="sm" variant="ghost" ml="auto">
                   <LuSquarePen />
