@@ -1,12 +1,10 @@
-import { Box, Button, Card, Center, Flex, Stack, Text } from '@chakra-ui/react'
+import { Button, Card, Center, Container, Flex, HStack, Stack, Text } from '@chakra-ui/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn, useServerFn } from '@tanstack/react-start'
-import { LuDatabase, LuPlus, LuSearch } from 'react-icons/lu'
+import { LuDatabase, LuPlus, LuSquarePen } from 'react-icons/lu'
 import { authMiddleware } from '../lib/auth/middleware'
 import { db } from '../lib/db'
-import z from 'zod'
-import { EmptyState } from '../components/ui/empty-state'
 
 const getInstances = createServerFn({ method: 'GET' })
   .middleware([authMiddleware])
@@ -51,7 +49,7 @@ function RouteComponent() {
     mutationFn: useServerFn(createInstance),
   })
 
-  const emptyMarkup = instances.isSuccess && instances?.data?.length !== 0 && (
+  const emptyMarkup = instances.isSuccess && instances?.data?.length === 0 && (
     <Center h="full">
       <Card.Root>
         <Card.Body maxW="sm">
@@ -63,11 +61,11 @@ function RouteComponent() {
 
             <Text color="fg.muted" fontFamily="mono" fontSize="xs">
               An instance represents a Redis connection that Bull uses to manage and monitor your
-              job queues. 
+              job queues.
             </Text>
             <Text color="fg.muted" fontFamily="mono" fontSize="xs">
-            Each instance lets you connect to a different Redis server or cluster, so
-            you can track jobs, workers, and queue health.
+              Each instance lets you connect to a different Redis server or cluster, so you can
+              track jobs, workers, and queue health.
             </Text>
 
             <Button w="fit" mt="4">
@@ -97,6 +95,7 @@ function RouteComponent() {
           ml="auto"
           onClick={() => {
             create.mutateAsync({})
+            instances.refetch()
           }}
         >
           <LuPlus /> Add
@@ -104,6 +103,21 @@ function RouteComponent() {
       </Flex>
 
       {emptyMarkup}
+
+      {instances.isSuccess && instances.data.length > 0 && (
+        <Container maxW="4xl" my="8">
+          <Stack>
+            {instances.data.map((instance) => (
+              <HStack h="12">
+                <Text fontFamily="mono">{instance.name}</Text>
+                <Button size="sm" variant="ghost" ml="auto">
+                  <LuSquarePen />
+                </Button>
+              </HStack>
+            ))}
+          </Stack>
+        </Container>
+      )}
     </Stack>
   )
 }
