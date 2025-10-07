@@ -1,7 +1,8 @@
-import { DB as Database } from './types.ts'
+import { Kysely, PostgresDialect } from 'kysely'
+import { SerializePlugin } from 'kysely-plugin-serialize'
 import { Pool } from 'pg'
-import { CamelCasePlugin, Kysely, PostgresDialect } from 'kysely'
 import { env } from '../env/index.ts'
+import { DB as Database } from './types.ts'
 
 const dialect = new PostgresDialect({
   pool: new Pool({
@@ -11,5 +12,5 @@ const dialect = new PostgresDialect({
 
 export const db = new Kysely<Database>({
   dialect,
-  plugins: [new CamelCasePlugin({})],
+  plugins: [new SerializePlugin()],
 })

@@ -41,10 +41,11 @@ export interface Account {
 
 export interface Instances {
   connection: Json | null;
-  createdAt: Generated<Timestamp>;
+  created_at: Generated<Timestamp>;
   id: Generated<number>;
   name: string;
-  updatedAt: Generated<Timestamp>;
+  organization_id: string | null;
+  updated_at: Generated<Timestamp>;
 }
 
 export interface Invitation {

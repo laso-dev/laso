@@ -34,7 +34,7 @@ const theme = defineConfig({
         },
       },
       button: {
-        base: { rounded: 'none' },
+        base: { rounded: 'sm' },
         variants: {
           size: {
             sm: { ...buttonSizes['2xs'] },
