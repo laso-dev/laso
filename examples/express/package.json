@@ -1,0 +1,14 @@
+{
+  "name": "laso-express-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@lasodev/api": "workspace:*",
+    "express": "^4.19.2"
+  }
+}
+
