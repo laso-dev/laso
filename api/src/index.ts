@@ -1,0 +1,20 @@
+import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
+import { Hono } from "hono";
+
+const app = new Hono();
+
+// API routes
+app.get("/api/health", (c) => {
+  return c.json({ status: "ok" });
+});
+
+// Serve static files from web/dist in production
+app.use("/*", serveStatic({ root: "../web/dist" }));
+
+// Fallback to index.html for SPA routing
+app.get("/*", serveStatic({ root: "../web/dist", path: "index.html" }));
+
+serve({ fetch: app.fetch, port: 3000 }, (info) => {
+  console.log(`Server running at http://localhost:${info.port}`);
+});
