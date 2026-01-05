@@ -1,9 +1,10 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
-import { getQueues } from "./queues.js";
+import { QueueManager } from "./queues.js";
 
 const app = new Hono();
+const queueManager = new QueueManager();
 
 // API routes
 app.get("/api/health", (c) => {
@@ -11,7 +12,7 @@ app.get("/api/health", (c) => {
 });
 
 app.get("/api/queues", async (c) => {
-  const queues = await getQueues();
+  const queues = await queueManager.getQueues();
   return c.json(queues);
 });
 
