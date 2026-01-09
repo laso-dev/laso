@@ -22,6 +22,6 @@ app.use("/*", serveStatic({ root: "../web/dist" }));
 // Fallback to index.html for SPA routing
 app.get("/*", serveStatic({ root: "../web/dist", path: "index.html" }));
 
-serve({ fetch: app.fetch, port: 3000 }, (info) => {
+serve({ fetch: app.fetch, port: 8080 }, (info) => {
   console.log(`Server running at http://localhost:${info.port}`);
 });
